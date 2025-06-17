@@ -1,10 +1,10 @@
 import { db } from '@/lib/prisma';
-import { baseProcedure, createTRPCRouter, protectedProcedure } from '@/trpc/init';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '@/trpc/init-procedure';
 import { TRPCError } from '@trpc/server';
 import { randomUUID } from 'crypto';
 import { z } from 'zod';
 export const userRouter = createTRPCRouter({
-  createOrGetUser: baseProcedure
+  createOrGetUser: publicProcedure
     .input(
       z.object({
         email: z.string().email().optional(),

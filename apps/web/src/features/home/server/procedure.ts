@@ -1,5 +1,5 @@
 import { db } from '@/lib/prisma';
-import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
+import { createTRPCRouter, protectedProcedure } from '@/trpc/init-procedure';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
