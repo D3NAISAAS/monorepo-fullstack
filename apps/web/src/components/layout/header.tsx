@@ -11,7 +11,10 @@ export default function Header() {
     { to: "/", label: "Home" },
     { to: "/dashboard", label: "Dashboard" },
     { to: "/todos", label: "Todos" },
-    { to: "/posts", label: "Posts" },
+    { to: "/trpc-example/hybrid", label: "TRPC-Hybrid" },
+    { to: "/trpc-example/server", label: "TRPC-Server" },
+    { to: "/trpc-example/client", label: "TRPC-Client" },
+    // { to: "/email/tests", label: "Email-Tests" },
   ];
 
   return (
