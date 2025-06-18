@@ -41,7 +41,7 @@ Si tu veux partir d’un template Ink TypeScript :
 
 ```bash
 cd packages
-npx create-ink-app --typescript cli
+pnpm dlx create-ink-app --typescript cli
 ```
 
 Cela va générer une structure de ce type :
