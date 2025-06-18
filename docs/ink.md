@@ -75,7 +75,7 @@ Dans `packages/cli/package.json`, ajoute :
 
 ```jsonc
 {
-  "name": "@d3nai/cli",
+  "name": "@d3n/cli",
   "bin": {
     "d3cli": "dist/index.js" // le nom de la commande terminal que tu veux
   },
@@ -92,7 +92,7 @@ Ensuite, depuis la racine :
 
 ```bash
 pnpm install
-pnpm --filter @d3nai/cli dev   # Lancer ton CLI Ink en dev
+pnpm --filter @d3n/cli dev   # Lancer ton CLI Ink en dev
 ```
 
 ---
@@ -149,3 +149,115 @@ Tu peux facilement transposer :
 * Utilise `Ink`, `tsup` (ou `esbuild`) pour builder un exécutable propre.
 
 Souhaites-tu que je te fournisse un **template complet de `packages/cli` déjà configuré** avec Ink, tsup, et un exemple de commande `rename-scope` ?
+
+
+Pour **annuler un `pnpm link --global`**, tu as deux options selon ce que tu veux faire :
+
+---
+
+### 🔧 1. **Délier un package globalement (annule le lien)**
+
+Depuis **n’importe où** dans ton terminal :
+
+```bash
+pnpm unlink --global @d3n/cli
+```
+
+Ou, si tu utilisais le nom de commande CLI (`d3cli`) :
+
+```bash
+pnpm unlink --global d3cli
+```
+
+---
+
+### 🧼 2. **Nettoyer tous les liens globaux (optionnel)**
+
+Si tu veux tout réinitialiser (⚠️ cela déliera tous les paquets liés globalement avec `pnpm link`):
+
+```bash
+pnpm store prune
+```
+
+---
+
+### 🧪 Vérification
+
+Tu peux vérifier les liens globaux actuels avec :
+
+```bash
+pnpm list --global --depth 0
+```
+
+Tu devrais ne plus voir `@d3nai/cli` ou `d3cli` après l’avoir délié.
+
+---
+
+Si tu veux re-linker plus tard :
+
+```bash
+cd packages/cli
+pnpm link --global
+```
+
+Souhaites-tu que je t’ajoute une commande dans ton `package.json` pour automatiser l’unlink ?
+---
+
+## Utilisation de la CLI d3ncli
+
+Maintenant que nous avons restructuré la CLI pour utiliser `d3ncli` comme commande principale avec `rename-scope` comme sous-commande, voici comment l'utiliser :
+
+### En développement (sans build)
+
+```bash
+# Utiliser avec les valeurs par défaut (@repo/ → @d3nai/)
+pnpm dev -- rename-scope
+
+# Avec des valeurs personnalisées
+pnpm dev -- rename-scope --from=@repo/ --to=@votre-scope/
+
+# Afficher l'aide
+pnpm dev -- --help
+```
+
+### Après le build
+
+```bash
+# Construire la CLI
+pnpm build
+
+# Exécuter avec les valeurs par défaut
+pnpm start -- rename-scope
+
+# Avec des valeurs personnalisées
+pnpm start -- rename-scope --from=@repo/ --to=@votre-scope/
+```
+
+### Installation globale pour développement
+
+```bash
+# Dans le répertoire packages/cli
+pnpm link --global
+
+# Puis n'importe où
+d3ncli rename-scope --from=@repo/ --to=@votre-scope/
+```
+
+### Utilisation directe du script Node
+
+```bash
+# Après le build
+node dist/cli.js rename-scope --from=@repo/ --to=@votre-scope/
+```
+
+Le format général de la commande est :
+
+```bash
+d3ncli <sous-commande> [options]
+```
+
+Cette structure permet d'ajouter facilement d'autres sous-commandes à l'avenir, comme par exemple :
+
+* `d3ncli generate-component`
+* `d3ncli setup-project`
+* etc.
