@@ -1,12 +1,13 @@
+import Loader from "@/components/loader";
 import { authClient } from "@/lib/auth/auth-client";
+import { demoSignIn } from "@/server/demo-user";
 import { useForm } from "@tanstack/react-form";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import z from "zod/v4";
-import Loader from "@/components/loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { useRouter } from "next/navigation";
 
 export default function SignInForm({
   onSwitchToSignUp,
@@ -128,6 +129,27 @@ export default function SignInForm({
           className="text-indigo-600 hover:text-indigo-800"
         >
           Need an account? Sign Up
+        </Button>
+      </div>
+      {/* TODO: A SUPPRIMER AU PASSAGE EN PRODUCTION */}
+      <div>
+        <Button
+          className="w-full"
+          variant="outline"
+          onClick={async () => {
+            try {
+              const result = await demoSignIn("demo@demo.com", "123456789");
+              if (result && !result.success) {
+                toast.error(result.message);
+              }
+              router.push("/dashboard")
+              toast.success(result.message);
+            } catch (error) {
+              toast.error("An error occurred during sign in");
+            }
+          }}
+        >
+          Demo Sign In
         </Button>
       </div>
     </div>

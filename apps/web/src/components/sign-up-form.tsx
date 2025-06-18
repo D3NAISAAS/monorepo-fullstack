@@ -1,5 +1,6 @@
 import Loader from "@/components/loader";
 import { authClient } from "@/lib/auth/auth-client";
+import { demoSignUp } from "@/server/demo-user";
 import { useForm } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -153,6 +154,28 @@ export default function SignUpForm({
           className="text-indigo-600 hover:text-indigo-800"
         >
           Already have an account? Sign In
+        </Button>
+      </div>
+      {/* TODO: A SUPPRIMER AU PASSAGE EN PRODUCTION */}
+      <div>
+        <Button
+          className="w-full"
+          variant="outline"
+          onClick={async () => {
+            try {
+              const result = await demoSignUp();
+              if (result && !result.success) {
+                toast.error(result.message);
+              }
+              router.push("/login")
+              toast.success(result.message);
+              // If successful, the server action will redirect, so no need to handle success here
+            } catch (error) {
+              toast.error("An error occurred during sign up");
+            }
+          }}
+        >
+          Demo Sign Up
         </Button>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { ModeToggle } from "../theme/theme-mode-toogle";
 
 import Link from "next/link";
 
-// import UserMenu from "./user-menu";
+import UserMenu from "@/components/user-menu";
 
 export default function Header() {
   const links = [
@@ -31,7 +31,7 @@ export default function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ModeToggle />
-          {/* <UserMenu /> */}
+          <UserMenu />
         </div>
       </div>
       <hr />
