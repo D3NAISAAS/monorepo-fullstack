@@ -3,6 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 // import { expo } from "@better-auth/expo";
 import { env } from "@/env";
 import { db } from "@/lib/prisma";
+import { nextCookies } from "better-auth/next-js";
 
 console.log("Creating Better Auth instance...");
 console.log("Database instance:", !!db);
@@ -19,5 +20,6 @@ export const auth = betterAuth({
   },
   plugins: [
     // expo(),
+    nextCookies()
   ],
 });

@@ -4,14 +4,17 @@ import { ModeToggle } from "../theme/theme-mode-toogle";
 
 import Link from "next/link";
 
-// import UserMenu from "./user-menu";
+import UserMenu from "@/components/user-menu";
 
 export default function Header() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/dashboard", label: "Dashboard" },
     { to: "/todos", label: "Todos" },
-    { to: "/posts", label: "Posts" },
+    { to: "/trpc-example/hybrid", label: "TRPC-Hybrid" },
+    { to: "/trpc-example/server", label: "TRPC-Server" },
+    { to: "/trpc-example/client", label: "TRPC-Client" },
+    // { to: "/email/tests", label: "Email-Tests" },
   ];
 
   return (
@@ -28,7 +31,7 @@ export default function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ModeToggle />
-          {/* <UserMenu /> */}
+          <UserMenu />
         </div>
       </div>
       <hr />
