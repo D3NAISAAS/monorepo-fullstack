@@ -1,0 +1,18 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "react-email"
+      }
+    ]
+  },
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ],
+}
