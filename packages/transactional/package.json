@@ -5,6 +5,12 @@
   "workspaces": [
     ".react-email"
   ],
+  "main": "index.ts",
+  "exports": {
+    "./emails/*": "./emails/*.tsx",
+    "./locales": "./locales/index.ts",
+    "./render": "./render.ts"
+  },
   "scripts": {
     "dev": "email dev -p 3030",
     "export": "email export",
