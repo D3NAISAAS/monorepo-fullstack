@@ -11,7 +11,7 @@
 	},
 	"scripts": {
 		"dev": "tsx source/cli.tsx",
-		"build": "tsup source/cli.tsx --format esm --dts",
+		"build": "tsup source/cli.tsx --format esm --dts --tsconfig tsconfig.json",
 		"start": "node dist/cli.js",
 		"lint": "eslint .",
 		"typecheck": "tsc --noEmit"

@@ -37,7 +37,7 @@ export const YelpRecentLoginEmail = ({
   const formattedDate = new Intl.DateTimeFormat('en', {
     dateStyle: 'long',
     timeStyle: 'short',
-  }).format(loginDate);
+  }).format(loginDate ?? new Date());
 
   return (
     <Html>

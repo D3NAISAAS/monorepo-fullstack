@@ -1,7 +1,7 @@
 'use client';
 
+import DOMPurify from 'dompurify'; // yarn add dompurify @types/dompurify
 import { useEffect, useState } from 'react';
-
 interface EmailRendererProps {
   html: string;
 }
@@ -17,12 +17,15 @@ export function EmailRenderer({ html }: EmailRendererProps) {
 
   // Pendant le rendu côté serveur ou avant le montage, afficher un placeholder
   if (!mounted) {
-    return <div>Chargement de l'email...</div>;
+    return <div>Chargement de l&apos;email...</div>;
   }
 
   return (
     <div className="email-preview">
-      <div className="email-rendered" dangerouslySetInnerHTML={{ __html: html }} />
+      <div
+        className="email-rendered"
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
+      />
       <details className="email-source">
         <summary>Voir le code source</summary>
         <pre className="p-4 bg-gray-100 rounded overflow-auto max-h-[500px] text-sm">

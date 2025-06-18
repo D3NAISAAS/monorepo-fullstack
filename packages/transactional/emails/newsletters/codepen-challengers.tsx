@@ -40,7 +40,7 @@ export const CodepenChallengersEmail = () => (
 
         <Heading style={heading}>
           <strong>This week:</strong> #CodePenChallenge:{' '}
-          <Text style={cubeText}>Cubes</Text>
+          <span style={cubeText}>Cubes</span>
         </Heading>
 
         <Section style={section}>

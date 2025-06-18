@@ -97,9 +97,6 @@ function enhanceDiffWithContext(diff: Change[], contextLines: number): Change[] 
           }
 
           result.push({ ...part, value: contextValue });
-        } else {
-          // Sinon, on ignore cette partie
-          continue;
         }
       }
     }

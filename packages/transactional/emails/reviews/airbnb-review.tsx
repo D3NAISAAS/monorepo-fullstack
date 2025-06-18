@@ -14,9 +14,9 @@ import {
 } from '@react-email/components';
 
 interface AirbnbReviewEmailProps {
-  authorName?: string;
-  authorImage?: string;
-  reviewText?: string;
+  authorName: string;
+  authorImage: string;
+  reviewText: string;
 }
 
 // const baseUrl = process.env.VERCEL_URL
