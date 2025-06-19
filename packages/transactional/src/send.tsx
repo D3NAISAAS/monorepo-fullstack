@@ -115,7 +115,7 @@ export const reSendMarkdownEmail = async ({
   tags?: { name: string; value: string }[];
   unsubscribeToken?: string;
 }) => {
-  return sendEmail({
+  return reSendEmail({
     to,
     subject,
     react: <MarkdownEmail preview={preview} markdown={markdown} />,
@@ -147,7 +147,7 @@ export const reSendTemplateEmail = async <T extends Record<string, any>>({
 }) => {
   const TemplateComponent = template;
 
-  return sendEmail({
+  return reSendEmail({
     to,
     subject,
     react: <TemplateComponent {...props} />,
@@ -181,7 +181,7 @@ export function reSendPasswordResetEmail({
   tags?: { name: string; value: string }[];
   unsubscribeToken?: string;
 }) {
-  return sendNamedTemplateEmail({
+  return reSendNamedTemplateEmail({
     to,
     templateName: "password-reset",
     props: { userEmail, resetUrl },
@@ -215,7 +215,7 @@ export function reSendInviteEmail({
   tags?: { name: string; value: string }[];
   unsubscribeToken?: string;
 }) {
-  return sendNamedTemplateEmail({
+  return reSendNamedTemplateEmail({
     to,
     templateName: "invite",
     props: { inviterName, teamName, inviteLink },
@@ -247,7 +247,7 @@ export function reSendWelcomeEmail({
   tags?: { name: string; value: string }[];
   unsubscribeToken?: string;
 }) {
-  return sendNamedTemplateEmail({
+  return reSendNamedTemplateEmail({
     to,
     templateName: "welcome",
     props: { name, actionUrl },
@@ -350,17 +350,10 @@ export function reSendNamedTemplateEmail<TemplateName extends keyof EmailTemplat
  * Cette fonction simplifie l'ajout de nouveaux templates dans le futur
  */
 export function createStandardEmailSender<TemplateName extends keyof EmailTemplateMap>(
-  templateName: TemplateName,
-  category?: string
-) {
+  templateName: TemplateName, category?: string) {
   return function reSendEmail(
     {
-      to,
-      props,
-      subject,
-      test,
-      tags,
-      unsubscribeToken,
+      to, props, subject, test, tags, unsubscribeToken,
     }: {
       to: string;
       props: EmailTemplateMap[TemplateName]['props'];
