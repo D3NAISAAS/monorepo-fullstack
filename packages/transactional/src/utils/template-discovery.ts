@@ -69,7 +69,7 @@ export function generateTemplateImports(directoryPath: string, prefix: string = 
     .join('\n');
 
   // Nous n'avons plus besoin de générer les interfaces car nous les importons directement des composants
-  
+
   // Alias de types pour la compatibilité
   const typeAliases = templates
     .map(template => {
@@ -87,7 +87,7 @@ export function generateTemplateImports(directoryPath: string, prefix: string = 
   // Générer les fonctions d'envoi
   const senderFunctions = templates
     .map(template => {
-      return `export const send${template.componentName} = createStandardEmailSender('${template.name}', 'standard');`;
+      return `export const send${template.componentName} = reSendNamedTemplateEmail('${template.name}', 'standard');`;
     })
     .join('\n');
 

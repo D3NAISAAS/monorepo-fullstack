@@ -2,7 +2,6 @@ import { render } from "@react-email/render";
 import { nanoid } from "nanoid";
 import React, { ReactElement } from "react";
 import MarkdownEmail from "../components/markdown-email";
-import SummaryEmail, { type SummaryEmailProps } from "../emails/default/inbox-zero/summary";
 import { resend } from "./client";
 import { EmailTemplateMap, emailTemplates } from "./templates";
 
@@ -51,7 +50,7 @@ export const reSendEmail = async ({
 
   // Prepare email options
   const emailOptions: any = {
-    from: "Inbox Zero <updates@transactional.getinboxzero.com>",
+    from: "Test App <onboarding@resend.dev>",
     to: test ? "delivered@resend.dev" : to,
     subject,
   };
@@ -77,7 +76,7 @@ export const reSendEmail = async ({
   // Add unsubscribe headers if token is provided
   if (unsubscribeToken) {
     emailOptions.headers["List-Unsubscribe"] =
-      `<https://www.getinboxzero.com/api/unsubscribe?token=${unsubscribeToken}>`;
+      `<https://example.com/api/unsubscribe?token=${unsubscribeToken}>`;
     emailOptions.headers["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click";
   }
 
@@ -90,7 +89,7 @@ export const reSendEmail = async ({
 
   if (result.error) {
     console.error("Error sending email", result.error);
-    throw new Error(`Error sending email: ${result.error.message}`);
+    throw new Error(`Error sending email: ${result.error.message || JSON.stringify(result.error)}`);
   }
 
   return result;
@@ -347,35 +346,6 @@ export function reSendNamedTemplateEmail<TemplateName extends keyof EmailTemplat
 };
 
 /**
- * Fonction pour envoyer un email de résumé d'activité
- */
-export const reSendSummaryEmail = async ({
-  to,
-  test,
-  emailProps,
-  subject = "Your weekly email summary",
-}: {
-  to: string;
-  test?: boolean;
-  emailProps: SummaryEmailProps;
-  subject?: string;
-}) => {
-  return sendEmail({
-    to,
-    subject,
-    react: <SummaryEmail {...emailProps} />,
-    test,
-    unsubscribeToken: emailProps.unsubscribeToken,
-    tags: [
-      {
-        name: "category",
-        value: "activity-update",
-      },
-    ],
-  });
-};
-
-/**
  * Fonction utilitaire pour créer facilement des fonctions d'envoi d'email pour n'importe quel template
  * Cette fonction simplifie l'ajout de nouveaux templates dans le futur
  */
@@ -400,7 +370,7 @@ export function createStandardEmailSender<TemplateName extends keyof EmailTempla
       unsubscribeToken?: string;
     }
   ) {
-    return sendNamedTemplateEmail({
+    return reSendNamedTemplateEmail({
       to,
       templateName,
       props,
@@ -415,24 +385,3 @@ export function createStandardEmailSender<TemplateName extends keyof EmailTempla
   };
 }
 
-// Pour la compatibilité avec le code existant
-export const createMiddayEmailSender = <TemplateName extends keyof EmailTemplateMap>(templateName: TemplateName) =>
-  createStandardEmailSender(templateName, 'midday');
-
-export const createD3nEmailSender = <TemplateName extends keyof EmailTemplateMap>(templateName: TemplateName) =>
-  createStandardEmailSender(templateName, 'd3n');
-
-// Exemples d'utilisation de la fonction createStandardEmailSender
-
-// Création de fonctions d'envoi pour les templates standard
-export const sendWelcomeStandardEmail = createStandardEmailSender('welcome', 'standard');
-export const sendPasswordResetStandardEmail = createStandardEmailSender('password-reset', 'standard');
-
-// Pour la compatibilité avec le code existant - templates midday
-export const sendMiddayTransactionsEmail = createMiddayEmailSender('midday-transactions');
-export const sendMiddayInvoiceEmail = createMiddayEmailSender('midday-invoice');
-export const sendMiddayConnectionExpireEmail = createMiddayEmailSender('midday-connection-expire');
-
-// Vous pouvez maintenant créer des fonctions d'envoi pour n'importe quel template
-// sans vous soucier du dossier dans lequel il se trouve
-// Exemple: export const sendNewFeatureEmail = createStandardEmailSender('new-feature');

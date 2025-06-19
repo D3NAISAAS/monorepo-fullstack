@@ -5,8 +5,11 @@ import InviteEmail, { type InviteProps } from "../emails/invite";
 import PasswordResetEmail, { type PasswordResetProps } from "../emails/password-reset";
 // Utiliser le template standard au lieu de l'ancien
 import WelcomeEmail, { type WelcomeEmailProps } from "../emails/standard/welcome";
+// Importer le template netlify-welcome
+import NetlifyWelcomeEmail from "../emails/standard/netlify-welcome";
 // Alias de type pour la compatibilité
 type WelcomeProps = WelcomeEmailProps;
+type NetlifyWelcomeProps = import("../emails/standard/netlify-welcome").NetlifyWelcomeEmailProps;
 
 // Import des templates du dossier midday
 import MidDayApiKeyCreatedEmail from "../emails/midday/api-key-created";
@@ -125,6 +128,7 @@ export type EmailTemplateMap = {
   'password-reset': EmailTemplate<PasswordResetProps>;
   'invite': EmailTemplate<InviteProps>;
   'welcome': EmailTemplate<WelcomeProps>;
+  'netlify-welcome': EmailTemplate<NetlifyWelcomeProps>;
 
   // Templates du dossier midday (pour la compatibilité avec le code existant)
   'midday-welcome': EmailTemplate<MidDayWelcomeProps>;
@@ -170,7 +174,29 @@ const standardTemplates = {
   'welcome': createTemplate(WelcomeEmail, {
     name: 'John Doe',
     actionUrl: 'https://example.com/get-started'
-  } as WelcomeProps)
+  } as WelcomeProps),
+  
+  'netlify-welcome': createTemplate(NetlifyWelcomeEmail, {
+    steps: [
+      {
+        id: 1,
+        Description: "Déployez votre premier projet. Connectez-vous à Git ou choisissez un template."
+      },
+      {
+        id: 2,
+        Description: "Vérifiez vos logs de déploiement. Surveillez les erreurs potentielles."
+      },
+      {
+        id: 3,
+        Description: "Configurez votre domaine personnalisé pour une meilleure expérience utilisateur."
+      }
+    ],
+    links: [
+      { title: "Documentation", href: "https://docs.example.com" },
+      { title: "Support", href: "https://support.example.com" },
+      { title: "Tutoriels", href: "https://tutorials.example.com" }
+    ]
+  } as NetlifyWelcomeProps)
 };
 
 // Templates du dossier midday
