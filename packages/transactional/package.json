@@ -6,14 +6,6 @@
     ".react-email"
   ],
   "main": "src/index.ts",
-  "exports": {
-    "./emails/*": "./emails/*.tsx",
-    "./components/*": "./components/*.tsx",
-    "./locales": "./locales/index.ts",
-    "./render": "./render.ts",
-    "./contacts": "./src/contacts",
-    "./send": "./src/send.tsx"
-  },
   "scripts": {
     "dev": "email dev -p 3030",
     "export": "email export",
@@ -22,12 +14,14 @@
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
     "build": "email build",
-    "start": "email start"
+    "start": "email start",
+    "discover-templates": "tsx scripts/discover-templates.ts"
   },
   "devDependencies": {
     "@types/node": "^24.0.3",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
   "dependencies": {
@@ -39,6 +33,7 @@
     "@react-email/render": "1.1.2",
     "@react-email/tailwind": "1.0.5",
     "date-fns": "^4.1.0",
+    "fs": "0.0.1-security",
     "nanoid": "^5.1.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
