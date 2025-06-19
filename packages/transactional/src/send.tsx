@@ -1,8 +1,8 @@
 import { render } from "@react-email/render";
 import { nanoid } from "nanoid";
-import { resend } from "./client";
 import type { ReactElement } from "react";
-import SummaryEmail, { type SummaryEmailProps } from "../emails/summary";
+import SummaryEmail, { type SummaryEmailProps } from "../emails/inbox-zero/summary";
+import { resend } from "./client";
 
 const sendEmail = async ({
   to,

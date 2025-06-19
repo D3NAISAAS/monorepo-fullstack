@@ -10,7 +10,9 @@
     "./emails/*": "./emails/*.tsx",
     "./components/*": "./components/*.tsx",
     "./locales": "./locales/index.ts",
-    "./render": "./render.ts"
+    "./render": "./render.ts",
+    "./contacts": "./src/contacts",
+    "./send": "./src/send.tsx"
   },
   "scripts": {
     "dev": "email dev -p 3030",
