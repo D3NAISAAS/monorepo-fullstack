@@ -33,6 +33,67 @@ packages/transactional/
 └── README.md
 ```
 
+## Architecture du système
+
+Le diagramme ci-dessous illustre l'architecture et le flux de données du package transactional :
+
+```mermaid
+graph TD
+    A[Application] -->|Appelle| B[package transactional]
+    
+    subgraph "Package Transactional"
+        B --> C{Type d'envoi}
+        
+        C -->|Envoi par nom de template| D[sendNamedTemplateEmail]
+        C -->|Envoi avec markdown| E[sendMarkdownEmail]
+        C -->|Envoi avec template direct| F[sendTemplateEmail]
+        C -->|Envoi avec React| G[sendEmail]
+        
+        subgraph "Gestion des Templates"
+            H[(Templates Registry)] --> |Importés dans| D
+            I[emails/standard/*.tsx] -->|Découverts par| J[scripts/discover-templates.ts]
+            K[emails/midday/*.tsx] -->|Définis dans| L[src/templates.tsx]
+            J -->|Génère| M[src/generated-templates.ts]
+            M -->|Ajoute les templates à| H
+            L -->|Configure les templates| H
+        end
+        
+        D -->|Récupère le template| N[Création de l'email]
+        E -->|Utilise MarkdownEmail| N
+        F -->|Utilise le template fourni| N
+        G -->|Utilise le React fourni| N
+        
+        N -->|Rendu HTML/Text| O[Envoi via Resend]
+    end
+    
+    O -->|Envoi email| P[Destinataire]
+    
+    subgraph "Structure des fichiers"
+        Q[src/]
+        Q -->|Logique principale| R[send.tsx]
+        Q -->|Configuration des templates| S[templates.tsx]
+        Q -->|Templates générés| T[generated-templates.ts]
+        
+        U[emails/]
+        U -->|Templates standards| V[standard/]
+        U -->|Templates midday| W[midday/]
+        
+        X[scripts/]
+        X -->|Script de découverte| Y[discover-templates.ts]
+        
+        Z[components/]
+        Z -->|Composants réutilisables| AA[markdown-email.tsx etc.]
+    end
+    
+    classDef folder fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef file fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef function fill:#bfb,stroke:#333,stroke-width:1px;
+    
+    class Q,U,X,Z folder;
+    class R,S,T,Y,AA file;
+    class D,E,F,G function;
+```
+
 ## Comment utiliser
 
 ### Envoyer un email avec un template existant

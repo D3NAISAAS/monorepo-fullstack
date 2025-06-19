@@ -1,11 +1,13 @@
 // Import the React component directly for rendering preview
 import PasswordResetEmail from '@d3n/transactional/emails/default/reset-password/password-reset';
-// Import NetlifyWelcomeEmail for demonstration
-import { sendNetlifyWelcomeEmail, sendEmail } from '@d3n/transactional';
+
+// Import send functions for demonstration
+import { sendWelcomeEmail, sendNetlifyWelcomeEmail } from '@d3n/transactional';
 
 import { render } from '@react-email/components';
 import { EmailRenderer } from './email-renderer';
 import { EmailTestForm } from './email-test-form';
+import NetlifyWelcomeEmail from '@d3n/transactional/emails/standard/netlify-welcome';
 
 export default async function Page() {
   // Rendre l'email côté serveur pour prévisualisation

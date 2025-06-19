@@ -1,12 +1,12 @@
-import React, { ReactElement } from "react";
 import { render } from "@react-email/render";
 import { nanoid } from "nanoid";
-import { emailTemplates, EmailTemplateMap } from "./templates";
+import React, { ReactElement } from "react";
 import MarkdownEmail from "../components/markdown-email";
 import SummaryEmail, { type SummaryEmailProps } from "../emails/default/inbox-zero/summary";
 import { resend } from "./client";
+import { EmailTemplateMap, emailTemplates } from "./templates";
 
-export const sendEmail = async ({
+export const reSendEmail = async ({
   to,
   subject,
   react,
@@ -99,7 +99,7 @@ export const sendEmail = async ({
 /**
  * Sends an email using a markdown template
  */
-export const sendMarkdownEmail = async ({
+export const reSendMarkdownEmail = async ({
   to,
   subject,
   preview,
@@ -129,7 +129,7 @@ export const sendMarkdownEmail = async ({
 /**
  * Sends an email using a template component and props
  */
-export const sendTemplateEmail = async <T extends Record<string, any>>({
+export const reSendTemplateEmail = async <T extends Record<string, any>>({
   to,
   subject,
   template,
@@ -165,7 +165,7 @@ export const sendTemplateEmail = async <T extends Record<string, any>>({
  * Fonction pour envoyer un email avec le template de réinitialisation de mot de passe
  * Utilise la fonction générique sendNamedTemplateEmail
  */
-export function sendPasswordResetEmail({
+export function reSendPasswordResetEmail({
   to,
   userEmail,
   resetUrl,
@@ -197,7 +197,7 @@ export function sendPasswordResetEmail({
  * Fonction pour envoyer un email d'invitation
  * Utilise la fonction générique sendNamedTemplateEmail
  */
-export function sendInviteEmail({
+export function reSendInviteEmail({
   to,
   inviterName,
   teamName,
@@ -231,7 +231,7 @@ export function sendInviteEmail({
  * Fonction pour envoyer un email de bienvenue
  * Utilise la fonction générique sendNamedTemplateEmail
  */
-export function sendWelcomeEmail({
+export function reSendWelcomeEmail({
   to,
   name,
   actionUrl,
@@ -293,7 +293,7 @@ function getDefaultSubject(templateName: string, props: Record<string, any>): st
  * Cette fonction permet d'utiliser n'importe quel template défini dans emailTemplates
  * sans avoir à importer directement le composant React
  */
-export function sendNamedTemplateEmail<TemplateName extends keyof EmailTemplateMap>(
+export function reSendNamedTemplateEmail<TemplateName extends keyof EmailTemplateMap>(
   {
     to,
     templateName,
@@ -336,7 +336,7 @@ export function sendNamedTemplateEmail<TemplateName extends keyof EmailTemplateM
   ];
 
   // Envoyer l'email avec le composant et les props
-  return sendEmail({
+  return reSendEmail({
     to,
     subject: emailSubject,
     react: <EmailComponent {...mergedProps as any} />,
@@ -349,7 +349,7 @@ export function sendNamedTemplateEmail<TemplateName extends keyof EmailTemplateM
 /**
  * Fonction pour envoyer un email de résumé d'activité
  */
-export const sendSummaryEmail = async ({
+export const reSendSummaryEmail = async ({
   to,
   test,
   emailProps,
@@ -383,7 +383,7 @@ export function createStandardEmailSender<TemplateName extends keyof EmailTempla
   templateName: TemplateName,
   category?: string
 ) {
-  return function sendEmail(
+  return function reSendEmail(
     {
       to,
       props,

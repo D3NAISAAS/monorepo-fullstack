@@ -1,20 +1,6 @@
-// Exporter toutes les fonctions d'envoi d'email
+// Exporter toutes les fonctions d'envoi d'email de base
 export * from "./send";
 export * from "./contacts";
-
+export * from "./generated-templates";
 // Exporter les templates et les types
-export * from "./templates";
-
-// Exporter les fonctions générées automatiquement avec des noms spécifiques pour éviter les conflits
-import { 
-  sendNetlifyWelcomeEmail,
-  // Renommer les exports qui entrent en conflit avec send.tsx
-  sendPasswordResetEmail as sendGeneratedPasswordResetEmail,
-  sendWelcomeEmail as sendGeneratedWelcomeEmail 
-} from "./generated-templates";
-
-export {
-  sendNetlifyWelcomeEmail,
-  sendGeneratedPasswordResetEmail,
-  sendGeneratedWelcomeEmail
-};
+// export * from "./templates";
