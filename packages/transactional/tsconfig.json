@@ -1,18 +1,22 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@d3n/typescript-config/react-library.json",
   "compilerOptions": {
     "plugins": [
       {
         "name": "react-email"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
   },
   "include": [
-    "."
+    "emails",
+    "components"
   ],
   "exclude": [
-    "dist",
-    "build",
     "node_modules"
   ],
 }

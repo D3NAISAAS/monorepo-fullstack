@@ -1,7 +1,5 @@
-import { render } from '@react-email/components';
-// import PasswordResetEmail from '@d3n/transactional/emails/reset-password/password-reset';
-// Utiliser un composant client pour l'affichage du HTML
 import PasswordResetEmail from '@d3n/transactional/emails/reset-password/password-reset';
+import { render } from '@react-email/components';
 import { EmailRenderer } from './email-renderer';
 
 export default async function Page() {

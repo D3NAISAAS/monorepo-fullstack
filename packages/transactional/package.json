@@ -5,9 +5,10 @@
   "workspaces": [
     ".react-email"
   ],
-  "main": "index.ts",
+  "main": "src/index.ts",
   "exports": {
     "./emails/*": "./emails/*.tsx",
+    "./components/*": "./components/*.tsx",
     "./locales": "./locales/index.ts",
     "./render": "./render.ts"
   },
@@ -17,19 +18,30 @@
     "clean": "rm -rf .turbo node_modules",
     "lint": "biome check .",
     "format": "biome format --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build": "email build",
+    "start": "email start"
   },
   "devDependencies": {
-    "@d3n/eslint-config": "workspace:*",
-    "@d3n/typescript-config": "workspace:*",
+    "@types/node": "^24.0.3",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "react-email": "4.0.16"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@d3n/eslint-config": "workspace:*",
+    "@d3n/typescript-config": "workspace:*",
+    "@d3n/ui": "workspace:*",
+    "@d3n/utils": "workspace:*",
     "@react-email/components": "0.1.0",
+    "@react-email/render": "1.1.2",
     "@react-email/tailwind": "1.0.5",
+    "date-fns": "^4.1.0",
+    "nanoid": "^5.1.5",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-email": "4.0.16",
+    "resend": "^4.6.0",
+    "responsive-react-email": "^0.0.5"
   }
 }

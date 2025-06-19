@@ -1,4 +1,4 @@
-import { getEmailUrl } from "@midday/utils/envs";
+import { getEmailUrl } from "@d3n/utils/envs";
 import {
   Column,
   Hr,
@@ -19,7 +19,7 @@ export function Footer() {
       <br />
 
       <Text className="text-[21px] font-regular">
-        Run your business smarter.
+        Run your business smarter 0.
       </Text>
 
       <br />

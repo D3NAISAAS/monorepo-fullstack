@@ -14,7 +14,7 @@ export default function Header() {
     { to: "/trpc-example/hybrid", label: "TRPC-Hybrid" },
     { to: "/trpc-example/server", label: "TRPC-Server" },
     { to: "/trpc-example/client", label: "TRPC-Client" },
-    // { to: "/email/tests", label: "Email-Tests" },
+    { to: "/email", label: "Email-Tests" },
   ];
 
   return (
