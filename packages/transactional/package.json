@@ -1,5 +1,5 @@
 {
-  "name": "@repo/transactional",
+  "name": "@d3n/transactional",
   "version": "1.0.0",
   "private": true,
   "workspaces": [
@@ -20,8 +20,8 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@d3n/eslint-config": "workspace:*",
+    "@d3n/typescript-config": "workspace:*",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "react-email": "4.0.16"
