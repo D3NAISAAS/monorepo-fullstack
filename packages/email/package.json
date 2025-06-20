@@ -1,0 +1,38 @@
+{
+	"name": "@d3n/email",
+	"version": "1.0.0",
+	"private": true,
+	"main": "./src/index.ts",
+	"scripts": {
+		"build": "email build",
+		"dev": "tsc --watch",
+		"email:dev": "email dev -p 3030",
+		"email:export": "email export --dir ./emails --outDir ./out",
+		"type-check": "tsc --noEmit",
+		"lint": "eslint src/",
+		"clean": "rm -rf dist"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.12.1",
+	"dependencies": {
+		"@react-email/components": "0.1.0",
+		"@react-email/render": "^1.1.2",
+		"@react-email/tailwind": "^1.0.5",
+		"date-fns": "^4.1.0",
+		"nodemailer": "^7.0.3",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"react-email": "^4.0.16",
+		"resend": "^4.6.0"
+	},
+	"devDependencies": {
+		"@d3n/eslint-config": "workspace:*",
+		"@d3n/typescript-config": "workspace:*",
+		"@types/node": "^24.0.3",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"typescript": "^5.8.3"
+	}
+}

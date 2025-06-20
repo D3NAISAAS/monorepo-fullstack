@@ -60,11 +60,7 @@
 					"level": "warn",
 					"fix": "safe",
 					"options": {
-						"functions": [
-							"clsx",
-							"cva",
-							"cn"
-						]
+						"functions": ["clsx", "cva", "cn"]
 					}
 				}
 			},
@@ -72,7 +68,7 @@
 				"noNonNullAssertion": "off"
 			},
 			"suspicious": {
-				"noExplicitAny": "warn"
+				"noExplicitAny": "off"
 			}
 		}
 	},

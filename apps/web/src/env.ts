@@ -23,12 +23,37 @@ export const env = createEnv({
 			.string()
 			.url("CORS_ORIGIN must be a valid url")
 			.min(1, "CORS_ORIGIN cannot be empty"),
-		RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY cannot be empty"),
-		RESEND_AUDIENCE_ID: z.string().min(1, "RESEND_AUDIENCE_ID cannot be empty"),
-		RESEND_EMAIL_FROM: z
+		// RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY cannot be empty"),
+		// RESEND_AUDIENCE_ID: z.string().min(1, "RESEND_AUDIENCE_ID cannot be empty"),
+		// RESEND_EMAIL_FROM: z
+		// 	.string()
+		// 	.email("RESEND_EMAIL_FROM must be a valid email")
+		// 	.min(1, "RESEND_EMAIL_FROM cannot be empty"),
+		EMAIL_PROVIDER: z.enum(["resend", "nodemailer"]).default("nodemailer"),
+		FROM_EMAIL: z
 			.string()
-			.email("RESEND_EMAIL_FROM must be a valid email")
-			.min(1, "RESEND_EMAIL_FROM cannot be empty"),
+			.email("FROM_EMAIL doit être un email valide")
+			.min(1, "FROM_EMAIL ne peut pas être vide")
+			.default("noreply@localhost"),
+		COMPANY_NAME: z
+			.string()
+			.min(1, "COMPANY_NAME cannot be empty")
+			.default("Mon SaaS"),
+		SMTP_HOST: z
+			.string()
+			.min(1, "SMTP_HOST cannot be empty")
+			.default("localhost"),
+		SMTP_PORT: z.string().min(1, "SMTP_PORT cannot be empty").default("1025"),
+		SMTP_SECURE: z.boolean().default(false),
+		SMTP_IGNORE_TLS: z.boolean().default(true),
+		RESEND_API_KEY: z
+			.string()
+			.min(1, "RESEND_API_KEY cannot be empty")
+			.default(""),
+		RESEND_AUDIENCE_ID: z
+			.string()
+			.min(1, "RESEND_AUDIENCE_ID cannot be empty")
+			.default(""),
 	},
 	client: {
 		NEXT_PUBLIC_API_URL: z
@@ -36,12 +61,7 @@ export const env = createEnv({
 			.url("NEXT_PUBLIC_API_URL must be a valid url")
 			.min(1, "NEXT_PUBLIC_API_URL cannot be empty"),
 	},
-	// If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
-	// runtimeEnv: {
-	//   DATABASE_URL: process.env.DATABASE_URL,
-	//   // NEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY,
-	// },
-	// For Next.js >= 13.4.4, you only need to destructure client variables:
+	emptyStringAsUndefined: true,
 	experimental__runtimeEnv: {
 		NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 	},
