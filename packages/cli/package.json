@@ -10,7 +10,7 @@
 		"node": ">=16"
 	},
 	"scripts": {
-		"dev": "tsx source/cli.tsx",
+		"devvv": "tsx source/cli.tsx",
 		"build": "tsup source/cli.tsx --format esm --dts --tsconfig tsconfig.json",
 		"start": "node dist/cli.js",
 		"lint": "eslint .",

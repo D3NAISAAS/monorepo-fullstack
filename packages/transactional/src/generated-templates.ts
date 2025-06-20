@@ -28,9 +28,9 @@ export const generatedTemplates = {
 };
 
 // Fonctions d'envoi générées automatiquement
-export const sendNetlifyWelcomeEmail = createStandardEmailSender('netlify-welcome', 'standard');
-export const sendPasswordResetEmail = createStandardEmailSender('password-reset', 'standard');
-export const sendWelcomeEmail = createStandardEmailSender('welcome', 'standard');
+export const sendNetlifyWelcomeEmail = createStandardEmailSender('netlify-welcome');
+export const sendPasswordResetEmail = createStandardEmailSender('password-reset');
+export const sendWelcomeEmail = createStandardEmailSender('welcome');
 
 /**
  * Pour utiliser ces templates générés automatiquement:

@@ -26,10 +26,11 @@ export const reSendEmail = async ({
 }) => {
   if (!resend) {
     console.log(
-      "Resend is not configured. You need to add a RESEND_API_KEY in your .env file for emails to work.",
+      "SEND - NO - WORK - You need to add a RESEND_API_KEY in your .env file for emails to work.",
     );
     return Promise.resolve();
   }
+  console.log("YOUPIE - RECUPERATION CLE API :", process.env.RESEND_API_KEY);
 
   // Ensure we have at least one content type (text, html, or react)
   if (!react && !html && !text) {
@@ -350,7 +351,7 @@ export function reSendNamedTemplateEmail<TemplateName extends keyof EmailTemplat
  * Cette fonction simplifie l'ajout de nouveaux templates dans le futur
  */
 export function createStandardEmailSender<TemplateName extends keyof EmailTemplateMap>(
-  templateName: TemplateName, category?: string) {
+  templateName: TemplateName) {
   return function reSendEmail(
     {
       to, props, subject, test, tags, unsubscribeToken,
@@ -369,10 +370,7 @@ export function createStandardEmailSender<TemplateName extends keyof EmailTempla
       props,
       subject,
       test,
-      tags: [
-        ...(tags || []),
-        ...(category ? [{ name: 'template_category', value: category }] : [])
-      ],
+      tags: tags || [],
       unsubscribeToken,
     });
   };

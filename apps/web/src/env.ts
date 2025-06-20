@@ -23,6 +23,9 @@ export const env = createEnv({
       .string()
       .url("CORS_ORIGIN must be a valid url")
       .min(1, "CORS_ORIGIN cannot be empty"),
+    RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY cannot be empty"),
+    RESEND_AUDIENCE_ID: z.string().min(1, "RESEND_AUDIENCE_ID cannot be empty"),
+    RESEND_EMAIL_FROM: z.string().email("RESEND_EMAIL_FROM must be a valid email").min(1, "RESEND_EMAIL_FROM cannot be empty"),
   },
   client: {
     NEXT_PUBLIC_API_URL: z.string().url("NEXT_PUBLIC_API_URL must be a valid url").min(1, "NEXT_PUBLIC_API_URL cannot be empty"),

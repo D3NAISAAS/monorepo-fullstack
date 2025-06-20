@@ -87,7 +87,7 @@ export function generateTemplateImports(directoryPath: string, prefix: string = 
   // Générer les fonctions d'envoi
   const senderFunctions = templates
     .map(template => {
-      return `export const send${template.componentName} = reSendNamedTemplateEmail('${template.name}', 'standard');`;
+      return `export const send${template.componentName} = createStandardEmailSender('${template.name}');`;
     })
     .join('\n');
 
