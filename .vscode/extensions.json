@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "expo.vscode-expo-tools",
+    "yoavbls.pretty-ts-errors",
+    "tauri-apps.tauri-vscode",
+    "rust-lang.rust-analyzer",
+    "austenc.tailwind-docs",
+    "prisma.prisma",
+    "formulahendry.auto-rename-tag",
+    "wmaurer.change-case",
+    "mikestead.dotenv",
+    "github.vscode-pull-request-github",
+    "cardinal90.multi-cursor-case-preserve",
+    "chakrounanas.turbo-console-log",
+    "unifiedjs.vscode-mdx",
+    "biomejs.biome",
+    "ms-vscode.vscode-typescript-next"
+  ]
+}

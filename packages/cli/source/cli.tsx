@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { render } from 'ink';
-import meow from 'meow';
-import React from 'react';
+import { render } from "ink";
+import meow from "meow";
+import React from "react";
 import App from "./app.js";
 
 const cli = meow(
@@ -25,16 +25,16 @@ const cli = meow(
 		importMeta: import.meta,
 		flags: {
 			from: {
-				type: 'string',
-				default: '@repo/',
+				type: "string",
+				default: "@repo/",
 			},
 			to: {
-				type: 'string',
-				default: '@d3nai/',
+				type: "string",
+				default: "@d3nai/",
 			},
 			help: {
-				type: 'boolean',
-				shortFlag: 'h',
+				type: "boolean",
+				shortFlag: "h",
 			},
 		},
 	},
@@ -47,7 +47,7 @@ if (cli.flags.help || !command) {
 	process.exit(0);
 }
 
-if (command === 'rename-scope') {
+if (command === "rename-scope") {
 	render(<App fromScope={cli.flags.from} toScope={cli.flags.to} />);
 } else {
 	console.error(`Commande inconnue: ${command}`);

@@ -1,21 +1,118 @@
 {
-  "$schema": "https://turborepo.com/schema.json",
-  "ui": "tui",
-  "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    }
-  }
+	"$schema": "https://turborepo.com/schema.json",
+	"globalDependencies": [
+		"**/.env.*local"
+	],
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"env": [
+				"NODE_ENV",
+				"DATABASE_URL",
+				"ADMIN_EMAILS",
+				"BETTER_AUTH_SECRET",
+				"BETTER_AUTH_URL",
+				"CORS_ORIGIN",
+				"GOOGLE_CLIENT_ID",
+				"GOOGLE_CLIENT_SECRET",
+				"GITHUB_CLIENT_ID",
+				"GITHUB_CLIENT_SECRET",
+				"RESEND_API_KEY",
+				"RESEND_AUDIENCE_ID",
+				"RESEND_EMAIL_FROM",
+				"NEXT_PUBLIC_API_URL"
+			],
+			"dependsOn": [
+				"^build"
+			],
+			"inputs": [
+				"$TURBO_DEFAULT$",
+				".env*"
+			],
+			"outputs": [
+				".next/**",
+				"!.next/cache/**"
+			]
+		},
+		"check-types": {
+			"dependsOn": [
+				"^check-types"
+			]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
+		"lint": {
+			"inputs": [
+				"src/**",
+				"app/**",
+				"package.json",
+				"biome.json",
+				"../../biome.json"
+			],
+			"dependsOn": [
+				"^lint"
+			]
+		},
+		"lint:fix": {
+			"inputs": [
+				"src/**",
+				"app/**",
+				"package.json",
+				"biome.json",
+				"../../biome.json"
+			],
+			"cache": false
+		},
+		"format": {
+			"inputs": [
+				"src/**",
+				"app/**",
+				"package.json",
+				"biome.json",
+				"../../biome.json"
+			],
+			"dependsOn": []
+		},
+		"format:fix": {
+			"inputs": [
+				"src/**",
+				"app/**",
+				"package.json",
+				"biome.json",
+				"../../biome.json"
+			],
+			"cache": false
+		},
+		"check": {
+			"inputs": [
+				"src/**",
+				"app/**",
+				"package.json",
+				"biome.json",
+				"../../biome.json"
+			],
+			"dependsOn": []
+		},
+		"check:fix": {
+			"inputs": [
+				"src/**",
+				"app/**",
+				"package.json",
+				"biome.json",
+				"../../biome.json"
+			],
+			"cache": false
+		},
+		"type-check": {
+			"dependsOn": [
+				"^build"
+			],
+			"inputs": [
+				"src/**",
+				"tsconfig.json"
+			]
+		}
+	}
 }
