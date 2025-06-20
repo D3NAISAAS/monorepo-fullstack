@@ -1,9 +1,5 @@
 {
-  "extends": "@d3n/typescript-config/base.json",
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+	"extends": "@d3n/typescript-config/base.json",
+	"include": ["."],
+	"exclude": ["node_modules"]
 }

@@ -1,34 +1,53 @@
 {
-  "name": "monorepo-fullstack",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build --filter=!transactional",
-    "dev": "turbo run dev --filter=!transactional",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types",
-    "lint": "turbo run lint --filter=!transactional --cache-dir=.turbo --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
-    "lint:fix": "turbo run lint --filter=!transactional --cache-dir=.turbo --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
-    "docker:start": "docker-compose up -d",
-    "docker:stop": "docker-compose down",
-    "docker:reset-db": "docker-compose down -v && docker-compose up -d postgres",
-    "docker:reset-all": "docker-compose down -v && docker-compose up -d",
-    "dev:native": "turbo -F native dev",
-    "dev:web": "turbo -F web dev",
-    "dev:server": "turbo -F server dev",
-    "db:push": "turbo -F server db:push",
-    "db:studio": "turbo -F server db:studio",
-    "db:generate": "turbo -F server db:generate",
-    "db:migrate": "turbo -F server db:migrate"
-  },
-  "devDependencies": {
-    "@manypkg/cli": "^0.24.0",
-    "cross-env": "^7.0.3",
-    "prettier": "^3.5.3",
-    "turbo": "^2.5.4",
-    "typescript": "5.8.2"
-  },
-  "packageManager": "pnpm@9.15.9",
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "monorepo-fullstack",
+	"private": true,
+	"scripts": {
+		"build": "turbo build --filter=!cli",
+		"clean:workspaces": "turbo clean",
+		"dev": "turbo dev --parallel --filter=!cli",
+		"test": "turbo test --parallel",
+		"start:dashboard": "turbo start --filter=@d3n/dashboard",
+		"start:website": "turbo start --filter=@d3n/website",
+		"dev:api": "turbo dev --filter=@d3n/api",
+		"dev:dashboard": "turbo dev --filter=@d3n/dashboard",
+		"build:dashboard": "turbo build --filter=@d3n/dashboard",
+		"dev:engine": "turbo dev --filter=@d3n/engine",
+		"dev:website": "turbo dev --filter=@d3n/website",
+		"dev:desktop": "turbo dev --filter=@d3n/desktop",
+		"jobs:dashboard": "turbo jobs --filter=@d3n/jobs",
+		"typecheck": "turbo typecheck",
+		"check-types": "turbo run check-types",
+		"docker:start": "docker-compose up -d",
+		"docker:stop": "docker-compose down",
+		"docker:reset-db": "docker-compose down -v && docker-compose up -d postgres",
+		"docker:reset-all": "docker-compose down -v && docker-compose up -d",
+		"clean": "git clean -xdf node_modules && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'pnpm-lock.yaml' -delete && pnpm store prune",
+		"fresh": "pnpm clean && pnpm install",
+		"lint": "turbo run lint",
+		"lint:fix": "turbo run lint:fix",
+		"format": "turbo run format",
+		"format:fix": "turbo run format:fix",
+		"check": "turbo run check",
+		"check:fix": "turbo run check:fix",
+		"check-all": "biome check . && turbo run type-check",
+		"prepare": "husky",
+		"validate": "pnpm clean && pnpm install && pnpm check:fix && pnpm type-check && pnpm build"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@manypkg/cli": "^0.24.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.1.2",
+		"turbo": "^2.5.4",
+		"typescript": "5.8.2"
+	},
+	"lint-staged": {
+		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+			"biome check --write ."
+		]
+	},
+	"packageManager": "pnpm@10.12.1",
+	"engines": {
+		"node": ">=18"
+	}
 }

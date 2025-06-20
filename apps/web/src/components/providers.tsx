@@ -8,25 +8,24 @@ import { Toaster } from "@/components/ui/sonner";
 import { TRPCProvider } from "@/trpc/client";
 
 export default function Providers({
-  children
+	children,
 }: {
-  children: React.ReactNode
+	children: React.ReactNode;
 }) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <TRPCProvider>
-
-        {/* <QueryClientProvider client={queryClient}> */}
-        {children}
-        {/* <ReactQueryDevtools /> */}
-        {/* </QueryClientProvider> */}
-      </TRPCProvider>
-      <Toaster richColors />
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider
+			attribute="class"
+			defaultTheme="system"
+			enableSystem
+			disableTransitionOnChange
+		>
+			<TRPCProvider>
+				{/* <QueryClientProvider client={queryClient}> */}
+				{children}
+				{/* <ReactQueryDevtools /> */}
+				{/* </QueryClientProvider> */}
+			</TRPCProvider>
+			<Toaster richColors />
+		</ThemeProvider>
+	);
 }

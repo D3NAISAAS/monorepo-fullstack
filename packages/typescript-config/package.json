@@ -1,12 +1,10 @@
 {
-  "name": "@d3n/typescript-config",
-  "version": "0.0.0",
-  "private": true,
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "*.json"
-  ]
+	"name": "@d3n/typescript-config",
+	"version": "0.0.0",
+	"private": true,
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": ["*.json"]
 }
